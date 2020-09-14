@@ -25,14 +25,19 @@ export default {
   },
   methods: {
       addCardInfo(input) {
-          console.log(input);
           this.card = input;
       },
       addCard(){
-          this.cards = JSON.parse(localStorage.getItem("cards"));
-          this.cards.push(this.card);
-          localStorage.setItem("cards", JSON.stringify(this.cards));
-          this.$router.push("/");
+        //check if data enetered is correct. Then add from
+        if(this.card.check === true) {
+            this.cards = JSON.parse(localStorage.getItem("cards"));
+            this.cards.push(this.card);
+            localStorage.setItem("cards", JSON.stringify(this.cards));
+            this.$router.push("/");
+        } else {
+          alert("Please enter correct data");
+        }
+
       }
   },
 };

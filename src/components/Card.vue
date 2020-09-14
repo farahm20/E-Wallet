@@ -1,17 +1,16 @@
 <template>
   <div class="card">
-      <!--bining a list of classes-->
-      <article :class="['card']">
-        <div class="chip">
-          <img :src="require(`../assets/${chip}.svg`)" alt="">
+    <!--bining a list of classes-->
+    <article :class="['card',vendor, chip]">
+      <div class="chip">
         <img :src="require(`../assets/${chip}.svg`)" alt />
-        </div>
-      </article>
+        <img :src="require(`../assets/${vendor}.svg`)" alt />
+      </div>
+    </article>
 
-    <article id="number"> 
+    <article id="number">
       <p>CARDHOLDER NUMBER</p>
       <h2>{{ card.number }}</h2>
-       
     </article>
 
     <article id="name">
@@ -23,7 +22,6 @@
       <p>VALID THROUGH</p>
       <h2>{{ card.date }}</h2>
     </article>
-
   </div>
 </template>
 
@@ -31,21 +29,21 @@
 export default {
   name: "BankCard",
   props: {
-    card: Object
+    card: Object,
   },
-  methods: {
-    number() {
-      console.log("Displaying card number: " + this.cardNumber)
-      return this.cardNumber;
-    },
-    holder() {
-      return this.card.name;
-    }
+  data: () => {
+    return {
+      displayVendor: "ninja",
+      displayNumber: "xxxx xxxx xxxx xxxx",
+      displayName: "Firstname Lastname",
+      displayDate: "mm/yy",
+    };
   },
+  methods: {},
   computed: {
     chip() {
       let chip = "dark";
-      if(!this.card.vendor){
+      if (!this.card.vendor) {
         return chip;
       } else if (this.card.vendor === "ninja") {
         return chip;
@@ -55,24 +53,43 @@ export default {
       }
     },
     vendor() {
-      console.log(this.card.vendor.JSON.stingify)
-      return this.card.vendor;
-    }
-  },
-  data: () => {
-    return {
-      cardImg: "ninja",
-      cardNumber: "XXXX XXXX XXXX XXXX",
-      cardName: "Firstname Lastname",
-      cardValidity: "MM/YY" 
-    };
+      if (!this.card.vendor) {
+        return this.displayVendor;
+      } else {
+        return this.card.vendor;
+      }
+    },
+    number() {
+      if (!this.card.number) {
+        return this.displayNumber;
+      } else {
+        let num = this.card.number;
+        num = num.match(/.{1,4}/g);
+        return num.join(' ');
+      }
+    },
+    name() {
+      if (!this.card.name) {
+        return this.displayName;
+      } else {
+        return this.card.name;
+      }
+    },
+    date() {
+      if (!this.card.date) {
+        return this.displayDate;
+      } else {
+        return this.card.date;
+      }
+    },
   },
 };
 </script>
 
 
 <style scoped>
-.card{
+
+.card {
   background-color: red;
   border-radius: 6px;
   width: 370px;
@@ -101,11 +118,11 @@ li {
   margin: 10px;
 }
 
-p{
+p {
   font-size: 20px;
 }
 
-img{
+img {
   transform: scale(0.8);
 }
 </style>
