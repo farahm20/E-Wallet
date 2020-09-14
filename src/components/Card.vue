@@ -1,11 +1,12 @@
 <template>
-  <div class="card">
+  <div :class="vendorColor" id="card">
     <!--bining a list of classes-->
     <article :class="['card',vendor, chip]">
       <div class="chip">
         <img :src="require(`../assets/${chip}.svg`)" alt />
         <img :src="require(`../assets/${vendor}.svg`)" alt />
       </div>
+  
     </article>
 
     <article id="number">
@@ -53,11 +54,20 @@ export default {
       }
     },
     vendor() {
+      
       if (!this.card.vendor) {
         return this.displayVendor;
       } else {
         return this.card.vendor;
       }
+    },
+    vendorColor() {
+      let className = "";
+
+      if (this.vendor === "ninja") {
+        className = "ninja";
+      }
+      return className;
     },
     number() {
       if (!this.card.number) {
@@ -65,7 +75,7 @@ export default {
       } else {
         let num = this.card.number;
         num = num.match(/.{1,4}/g);
-        return num.join(' ');
+        return num.join(" ");
       }
     },
     name() {
@@ -87,10 +97,27 @@ export default {
 </script>
 
 
-<style scoped>
+<style lang="scss" scoped>
+div {
+  &.ninja {
+    background-color: #222222;
+    color: #fffc
+  }
+  &.bitcoin {
+    background-color: #FFAE34;
+    color: #444
+  } 
+  &.blockchain {
+    background-color: #8B58F9;
+    color: #fffc
+  }
+  &.evil {
+    background-color: #F33355;
+    color: #fffc
+  }
+}
 
 .card {
-  background-color: red;
   border-radius: 6px;
   width: 370px;
 }

@@ -128,6 +128,9 @@ export default {
       }
     },
   },
+  computed: {
+  
+  },
   methods: {
     addCardInfo() {
       const input = {
@@ -137,7 +140,7 @@ export default {
         ccv: this.cvc,
         vendor: this.vendor,
         //Card will only ne submitted if check is true
-        check: false,
+        check: false
       };
       //checking if all checkInput keys are false
       const checkAllKeys = Object.keys(this.checkInput).every(
