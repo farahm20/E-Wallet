@@ -26,34 +26,24 @@ export default {
   },
   methods: {
     setCard(index) {
+      console.log("cardstack" + index);
       this.$emit("setCard", index)
     }
   }
 };
 </script>
 
-<style scoped>
-    #cards{
-        width: 100%;
-        max-width: 1200px;
-        margin: 40px auto;
-        padding: 0 20px;
-        box-sizing: border-box;
-    }
+<style lang="scss" scoped>
+#cards {
+  height: 24rem;
 
-    ul{
-        display: flex;
-        flex-wrap: wrap;
-        list-style-type: none;
-        padding: 0;
-    }
+  .cardContainer:last-child {
+    overflow: visible;
+  }
 
-    li{
-        flex-grow: 1;
-        flex-basis: 300px;
-        text-align: center;
-        padding: 30px;
-        border: 1px solid #222;
-        margin: 10px;
-    }
+  #theCard {
+    cursor: pointer;
+    height: 2.5rem;
+  }
+}
 </style>

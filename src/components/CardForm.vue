@@ -47,7 +47,7 @@
     </div>
     <div class="form">
       <label for="vendor">
-        VENDOR
+        Vendor
         <span v-if="checkInput.vendor" class="error">Cannot be left empty.</span>
       </label>
       <select v-model="vendor" name="vendor" id="vendor">
@@ -71,7 +71,6 @@ export default {
       date: "",
       ccv: "",
       vendor: "",
-
       checkInput: {
         number: false,
         name: false,
@@ -155,7 +154,6 @@ export default {
         }
       }
       //emitting to AddCard
-      console.log("Cardform check: " + input.check);
       this.$emit("addCardInfo", input);
     },
     checkNumber(number) {
@@ -164,7 +162,6 @@ export default {
     },
     checkName(name) {
       const pattern = /^[a-zA-Z]+ [a-zA-Z]+$/;
-      console.log("check name validate: " + name);
       return pattern.test(name);
     },
     checkDate(date) {
@@ -194,7 +191,8 @@ export default {
 
 .form label {
   align-self: flex-start;
-  font-size: 0.7rem;
+  font-size: 1rem;
+  margin-top: 4px;
 }
 
 .form input {

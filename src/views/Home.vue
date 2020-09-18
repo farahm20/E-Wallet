@@ -1,42 +1,66 @@
 <template>
   <main id="home">
     <Card :card="cardRecieved" class="active" />
-    <CardStack :cards="cards" @setCard="setCard" /> 
-
+    <section class="cardEdit">
+      <CardStack :cards="cards" @setCard="setCard" />
+      <EditCard v-if="editButtonIs" @active="active" @remove="remove" />
+    </section>
   </main>
 </template>
 
 <script>
-import Card from "../components/Card"
-import CardStack from "../components/CardStack"
-
+import Card from "../components/Card";
+import CardStack from "../components/CardStack";
+import EditCard from "../components/ShowCard";
 
 export default {
   name: "Home",
   data: () => {
     return {
-      cardRecieved: {},
       savedCards: localStorage.getItem("cards"), //recieving the stored cards from local storage
       index: "",
-      cards: [] 
+      cards: [],
+      cardRecieved: {},
+      editButtonIs: false,
     };
   },
   components: {
-    Card, 
+    Card,
     CardStack,
+    EditCard,
   },
   methods: {
-    setCard(index) {
-      this.index = index;
-    },
     addCard() {
+      console.log("home addCard router function");
       this.$router.push("/AddCard");
-    }
+    },
+    //going to AddCard page
+    setCard(index) {
+      console.log("setCard in home. index = " + index);
+      this.index = index;
+      this.editButtonIs = true;
+    },
+    
+    //setting card as active or deleting card from CardStack
+    //set card as active. bring to top. store in local storage.
+    active() {
+      const card = this.cards[this.index];
+      localStorage.setItem("cardRecieved", JSON.stringify(card));
+      this.cardRecieved = card;
+      this.editButtonIs = false;
+    },
+    //remove card from stack and localstorage
+    remove() {
+      this.cards.splice[(this.index, 1)];
+      localStorage.setItem("cards", JSON.stringify(this.card));
+      this.cardRecieved = {};
+      this.editButtonIs = false;
+    },
   },
   watch: {
     savedCards() {
       this.cards = JSON.parse(this.savedCards);
-    }
+    },
   },
   mounted() {
     if (localStorage.getItem("cards")) {
@@ -44,22 +68,29 @@ export default {
     } else {
       localStorage.setItem("cards", JSON.stringify(this.cards));
     }
-  
+
     // Active Card
     if (localStorage.getItem("cardRecieved")) {
-      this.activeCard = JSON.parse(localStorage.getItem("cardRecieved"));
+      this.cardRecieved = JSON.parse(localStorage.getItem("cardRecieved"));
     }
-  
-  }
-  
-}
+  },
+};
 </script>
 
-<style>
-
-#home{
+<style lang="scss" scoped>
+#home {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .cardEdit {
+    display: flex;
+    flex-direction: column;
+    margin-top: 6.5rem;
+  }
+
+  .active {
+    height: 15rem;
+  }
 }
 </style>

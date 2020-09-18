@@ -1,9 +1,10 @@
 <template>
   <section id="cardSection">
     <Card :card="card" />
-    <CardForm @addCard = "addCard" @addCardInfo = "addCardInfo"/>
+    <CardForm @addCard="addCard" @addCardInfo="addCardInfo" />
+
     <div class="button">
-        <button @click="addCard">Add Card</button>
+      <button @click="addCard">Add Card</button>
     </div>
   </section>
 </template>
@@ -15,8 +16,8 @@ import Card from "../components/Card.vue";
 export default {
   data() {
     return {
-        card: {},
-        cards: []
+      card: {},
+      cards: [],
     };
   },
   components: {
@@ -24,37 +25,46 @@ export default {
     Card,
   },
   methods: {
-      addCardInfo(input) {
-          this.card = input;
-      },
-      addCard(){
-        //check if data enetered is correct. Then add from
-        if(this.card.check === true) {
-            this.cards = JSON.parse(localStorage.getItem("cards"));
-            this.cards.push(this.card);
-            localStorage.setItem("cards", JSON.stringify(this.cards));
-            this.$router.push("/");
+    addCardInfo(input) {
+      return this.card = input;
+    },
+    addCard() {
+      console.log('oh, it entered the function');
+      //check if data enetered is correct. Then add from
+      if (this.card.check === true) {
+        if (localStorage.getItem("cards")) {
+          this.cards = JSON.parse(localStorage.getItem("cards"));
+          console.log(this.card); 
+          this.cards.push(this.card);
+          localStorage.setItem("cards", JSON.stringify(this.cards));
         } else {
-          alert("Please enter correct data");
+          this.cards.push(this.card);
+          localStorage.setItem("cards", JSON.stringify(this.cards));
+          console.log('here then?'); 
         }
-
+        this.$router.push("/");
+        //
+      } else {
+        alert("Please enter correct data");
       }
+    },
   },
 };
 </script>
 
-<style>
-#cardSection{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-button {
+<style lang="scss" scoped>
+#cardSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  button {
     color: white;
     text-align: center;
-    width: 360px;
+    width: 370px;
     height: 50px;
     border-radius: 8px;
     background-color: black;
+  }
 }
 </style>
