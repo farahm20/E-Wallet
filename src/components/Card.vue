@@ -9,18 +9,18 @@
     </article>
 
     <article id="number">
-      <h2>{{ card.number }}</h2>
+      <h2>{{ number }}</h2>
     </article>
     
     <div class="secondHalf">
         <article id="name">
           <p>CARD HOLDER </p>
-          <h2>{{ card.name }}</h2>
+          <h2>{{ name }}</h2>
         </article>
 
         <article id="validity">
           <p>VALID THRU </p>
-          <h2>{{ card.date }}</h2>
+          <h2>{{ date }}</h2>
         </article>
     </div>
   </div>
@@ -34,7 +34,7 @@ export default {
   },
   data: () => {
     return {
-      displayVendor: "ninja",
+      displayVendor: "evil",
       displayNumber: "xxxx xxxx xxxx xxxx",
       displayName: "Firstname Lastname",
       displayDate: "mm/yy",
@@ -109,8 +109,8 @@ div {
 }
 
 #card {
-  width: 24rem;
-  height: 15rem;
+  width: 384px;
+  height: 240px;
 
   display: grid;
   grid-template-areas:
@@ -126,22 +126,22 @@ div {
   font-family: monospace;
 
   .label {
-    font-size: 0.8rem;
+    font-size: 12.8px;
     margin-right: 20px;
     margin-left: 10px;
   }
 
   #number {
     grid-area: number;
-    font-size: 1.5rem;
-    width: 23rem;
+    font-size: 24px;
+    width: 368px;
     margin-left: 10px;
     margin-top: 10px;
   }
 
   #name {
     grid-area: name;
-    width: 16rem;
+    width: 256px;
     margin-left: 10px;
   }
 
@@ -163,8 +163,8 @@ div {
     justify-content: space-between;
 
     .vendor {
-      margin-top: 2.5rem;
-      margin-right: 1rem;
+      margin-top: 40px;
+      margin-right: 16px;
     }
 
     .dark {

@@ -8,7 +8,7 @@
         @click="setCard(index)" 
         class="cardContainer" >
           
-        <Card id="theCard" :card="card"/>
+        <Card class="card" :card="card"/>
       </div>
     </div>
 </template>
@@ -19,7 +19,7 @@ import Card from "../components/Card"
 
 export default {
   components: {
-    Card
+    Card,
   },
   props: {
     cards: Array 
@@ -34,16 +34,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#cards {
-  height: 24rem;
+
+
+  .card {
+    cursor:grab;
+  }
+
+  .cardContainer {
+    overflow: hidden;
+    cursor: pointer;
+    height: 40px;
+  }
 
   .cardContainer:last-child {
-    overflow: visible;
+    height: 370px;
   }
 
-  #theCard {
-    cursor: pointer;
-    height: 2.5rem;
-  }
-}
+
+
 </style>

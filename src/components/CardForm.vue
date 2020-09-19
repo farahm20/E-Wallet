@@ -156,6 +156,7 @@ export default {
       //emitting to AddCard
       this.$emit("addCardInfo", input);
     },
+    //Checking all the input
     checkNumber(number) {
       const pattern = /^[0-9]{16}/;
       return pattern.test(number);

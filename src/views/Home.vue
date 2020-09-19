@@ -31,12 +31,10 @@ export default {
   },
   methods: {
     addCard() {
-      console.log("home addCard router function");
       this.$router.push("/AddCard");
     },
     //going to AddCard page
     setCard(index) {
-      console.log("setCard in home. index = " + index);
       this.index = index;
       this.editButtonIs = true;
     },
@@ -86,11 +84,11 @@ export default {
   .cardEdit {
     display: flex;
     flex-direction: column;
-    margin-top: 6.5rem;
+    margin-top: 80px;;
   }
 
   .active {
-    height: 15rem;
+    height: 240px;
   }
 }
 </style>

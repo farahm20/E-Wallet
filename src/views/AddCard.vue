@@ -32,9 +32,12 @@ export default {
       console.log('oh, it entered the function');
       //check if data enetered is correct. Then add from
       if (this.card.check === true) {
-        if (localStorage.getItem("cards")) {
+        console.log('Localstorage: ', localStorage.getItem("cards"));
+        if (localStorage.getItem("cards") !== 'undefined') {
+          
           this.cards = JSON.parse(localStorage.getItem("cards"));
-          console.log(this.card); 
+
+        //console.log(this.card); 
           this.cards.push(this.card);
           localStorage.setItem("cards", JSON.stringify(this.cards));
         } else {

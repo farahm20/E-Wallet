@@ -1,7 +1,7 @@
 <template>
   <section class="editButtons">
-      <button @click="active" class="set-card">Active</button>
-      <button @click="remove" class="set-card">Delete</button>
+      <button @click="active" class="activeCard"><i class="fas fa-check-circle"></i></button>
+      <button @click="remove" class="deleteCard"><i class="fas fa-trash-alt icon trash-icon"></i></button>
   </section>
 </template>
 
@@ -20,11 +20,19 @@ export default {
 
 <style lang="scss" scoped>
 .editButtons {
-    width: 40px;
-    height: 40px;
+    position: absolute;
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: space-around;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.activeCard {
+    color: green;
+}
+
+.deleteCard {
+    color: red;
 }
 </style>
